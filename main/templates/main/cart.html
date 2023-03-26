@@ -1,0 +1,57 @@
+{% extends "main/base.html" %}
+
+{% block title %} 
+    Home Page
+{% endblock %}
+
+
+    
+
+
+{% block content %}
+    <div class="home_page">
+        <h1 >
+           Your Cart 
+        </h1>
+        {% if cartItems %} 
+             {% for items in cartItems %}
+                <div class="home_items">
+                    <div>
+                        <h2> Total {{cartTotal}} </h2>
+                    </div>
+                    <form method="post" action="#" >
+                        {% csrf_token %}
+                        <div class="home_item">
+                            <img src={{items.imgLInk}} alt="Image link" />
+                            <h2>
+                                {{items.name}}
+                            </h2>
+                            <p>
+                                {{items.descr}}
+                            </p>
+                            <p>
+                                {{items.price}}
+                            </p>
+                            <p>
+                                {{items.rating}}
+                            </p>
+                            <p>
+                                {{items.id}}
+                            </p>
+                        </div>
+                        <button type="submit", name="add", value="{{items.id}}">Remove Item</button>  
+                    </form> 
+                    
+                </div>
+            {% endfor %}
+            
+        {% else %}
+            <div>
+                <h1>
+                    Your Cart is Empty
+                </h1>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

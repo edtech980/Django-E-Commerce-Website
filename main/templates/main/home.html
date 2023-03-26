@@ -1,0 +1,51 @@
+{% extends "main/base.html" %}
+
+{% block title %} 
+    Home Page
+{% endblock %}
+
+
+    
+
+
+{% block content %}
+    <div class="home_page">
+        <h1 >
+            Cart {{cart}}
+        </h1>
+        {% for cat in category %}
+            <div class="home_cat">
+                <h1>
+                    {{cat}}
+                </h1>
+            </div>
+            {% for items in cat.item_set.all %}
+                <div class="home_items">
+                    <form method="post" action="#" >
+                        {% csrf_token %}
+                        <div class="home_item">
+                            <img src={{items.imgLInk}} alt="Image link" />
+                            <h2>
+                                {{items.name}}
+                            </h2>
+                            <p>
+                                {{items.descr}}
+                            </p>
+                            <p>
+                                {{items.price}}
+                            </p>
+                            <p>
+                                {{items.rating}}
+                            </p>
+                            <p>
+                                {{items.id}}
+                            </p>
+                        </div>
+                        <button type="submit", name="add", value="{{items.id}}">Add</button>  
+                    </form> 
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
